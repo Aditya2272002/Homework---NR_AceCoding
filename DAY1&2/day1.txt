@@ -1,0 +1,6 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+namespace Intro{
+   string s1 = "Hello i am called from another file";
+}
