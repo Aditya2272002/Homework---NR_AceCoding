@@ -1,4 +1,4 @@
-#include<iostream>
+#include<bits/stdc++.h>
 using namespace std;
 
 struct Node{
@@ -311,18 +311,88 @@ Node* reverseInKthGroup(Node* head,int k){
    return head;
 }
 
+//Loop Detection :- Floyd Algo
+void loopedLL(Node* head){
+   int flag = 0;
+   Node* slow = head;
+   Node* fast = head;
+   while(fast!=NULL && fast->next!=NULL){
+      fast = fast->next->next;
+      slow = slow->next;
+      if(fast==slow){
+         flag = 1;
+         cout<<"Looped LL\n";
+         break;
+      }
+   }
+   if(flag==0){
+      cout<<"No Looped LL\n";
+   }
+}
+
+void displayLoopedLL(Node* head){
+   vector<Node*> v;
+   Node* temp = head;
+   vector<Node*> :: iterator it;
+   
+   while(temp!=NULL){
+      it = find(v.begin(),v.end(),temp);
+      if(it==v.end()){
+         v.push_back(temp);
+      }else{
+         cout<<temp->next->data<<"->";
+         break;
+      }
+      cout<<temp->data<<"->";
+      temp=temp->next;
+   }
+} 
+
+//Removing Loop from LL
+Node* removeLoopfromLL(Node* head){
+   Node* slow = head;
+   Node* fast = head;
+   int flag = 0;
+   while(fast!=NULL && fast->next!=NULL){
+      fast = fast->next->next;
+      slow = slow->next;
+      if(fast==slow){
+         flag = 1;
+         break;
+      }
+   }
+   if(flag==1){
+      Node* t = slow;
+      fast = head;
+      while(t->next!=fast && fast->next!=t->next){
+         fast=fast->next;
+         t=t->next;
+      }
+      t->next = NULL;
+   }
+   else{ 
+      cout<<"Linked List is Not LOOPED\n";
+   }
+   return head;
+}
+
 int main()
 {
-   insertAtLast(100);
-   insertAtLast(200);
-   insertAtLast(300);
-   insertAtLast(400);
-   insertAtLast(500);
-   insertAtLast(600);
-     
+   head = new Node(10);
+   head->next = new Node(20);
+   head->next->next = new Node(30);
+   head->next->next->next = new Node(40);
+   head->next->next->next->next = new Node(25);
+   // head->next->next->next->next->next = new Node(60);
+
+   head->next->next->next->next->next = NULL;
+   // head->next->next->next->next->next->next = head->next->next;
+   // displayLoopedLL(head);
+   // loopedLL(head);
+   // Node* h = removeLoopfromLL(head);
    disPlay(head);  
    Node* h = reverseInKthGroup(head,2);
    disPlay(h);
-   
+
    return 0;
 }

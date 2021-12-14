@@ -102,6 +102,185 @@ void iterativeInorder(Node* root){
    }
 }
 
+//iterativePreorder
+void iterativePreorder(Node* root){
+   stack<pair<Node*,int>> st;
+   st.push({root,0});
+   while(!st.empty()){
+      Node* cur = st.top().first;
+      int state = st.top().second;
+      st.pop();   
+
+      if(cur==NULL){
+         continue;
+      }
+      else if(state==0){
+         cout<<cur->data<<" ";
+         st.push({cur,1});
+      }
+      else if(state==1){
+         st.push({cur,2});
+         st.push({cur->left,0});
+      }
+      else{
+         st.push({cur->right,0});
+      }
+   }
+}
+
+//iterativePostorder
+void iterativePostorder(Node* root){
+   stack<pair<Node*,int>> st;
+   st.push({root,0});
+   while(!st.empty()){
+      Node* cur = st.top().first;
+      int state = st.top().second;
+      st.pop();
+
+      if(cur==NULL){
+         continue;
+      }
+      else if(state==0){
+         st.push({cur,1});
+         st.push({cur->left,0});
+      }
+      else if(state==1){
+         st.push({cur,2});
+         st.push({cur->right,0});
+      }
+      else{
+         cout<<cur->data<<" ";
+      }
+   }
+}
+
+//Level Order with more funcationality
+void levelOrder2(Node* root){
+   queue<Node*>q;
+   q.push(root);
+   int level =0;
+   int d = 0;
+   while(!q.empty()){
+      int n = q.size();
+      d = d + n;
+      cout<<"Level = "<<level<<" has "<<n<<" nodes :- ";
+      for(int i=0;i<n;i++){
+         Node* cur = q.front();
+         q.pop();
+         cout<<cur->data<<" ";
+         if(cur->left!=NULL){
+            q.push(cur->left);
+         }
+         if(cur->right!=NULL){
+            q.push(cur->right);
+         }
+      }
+      level++;
+      cout<<"\n";
+   }
+}
+
+void leftView(Node* root){
+   queue<Node*>q;
+   q.push(root);
+   while(!q.empty()){
+      int n = q.size();
+      for(int i=0;i<n;i++){
+         Node* cur = q.front();
+         q.pop();
+         cout<<cur->data<<" ";
+         if(cur->left!=NULL){
+            q.push(cur->left);
+         }
+         if(cur->left==NULL && cur->right!=NULL){
+            q.push(cur->right);
+         }
+      }
+   }
+   cout<<"\n";
+}
+
+void rightView(Node* root){
+   queue<Node*>q;
+   q.push(root);
+   while(!q.empty()){
+      int n = q.size();
+      for(int i=0;i<n;i++){
+         Node* cur = q.front();
+         q.pop();
+         cout<<cur->data<<" ";
+         if(cur->right!=NULL){
+            q.push(cur->right);
+         }
+         if(cur->right==NULL && cur->left!=NULL){
+            q.push(cur->left);
+         }
+      }
+   }
+   cout<<"\n";
+}
+
+void topView(Node* root){
+   queue<pair<Node*,int>>q;
+   q.push({root,0});
+   map<int,int> freq;
+  
+   while(!q.empty()){
+      int n = q.size();
+     
+      for(int i=0;i<n;i++){
+        pair<Node*,int> cur = q.front();
+         q.pop();
+
+         if(freq.find(cur.second) == freq.end()){
+            freq[cur.second] = cur.first->data;
+         }
+
+         if(cur.first->left!=NULL){
+            q.push({cur.first->left,cur.second - 1});
+         }
+
+         if(cur.first->right!=NULL){
+            q.push({cur.first->right,cur.second + 1});
+         }
+      }
+   }
+
+   for(auto i : freq){
+      cout<<i.second<<" ";
+   }
+   cout<<"\n";
+}
+
+void bottomView(Node* root){
+   map<int,int> freq;
+   queue<pair<Node*,int>> q;
+   q.push({root,0});
+
+   while(!q.empty()){
+      int n = q.size();
+
+      for(int i=0;i<n;i++){
+         pair<Node*,int> cur = q.front();
+         q.pop();
+
+         freq[cur.second] = cur.first->data;
+         
+         if(cur.first->left!=NULL){
+            q.push({cur.first->left,cur.second - 1});
+         }
+         if(cur.first->right!=NULL){
+            q.push({cur.first->right,cur.second + 1});
+         }
+      }
+   }
+
+   for(auto i:freq){
+      cout<<i.second<<" ";
+   }
+   cout<<"\n";
+}
+
 int main()
 {  
    // Node* root = NULL;
@@ -114,19 +293,20 @@ int main()
    //    cin>>data;
    //    root=insert(root,data);
    // }
-   Node* root = new Node(10);
-   root->left = new Node(20);
-   root->left->left= new Node(40);
-   root->right = new Node(30);
-   root->right->left = new Node(50);
-   root->right->right = new Node(60);
 
-   // inorderTraversal(root);
-   cout<<"\n";
+   Node* root = new Node(1);
+   root->left = new Node(2);
+   root->left->left= new Node(4);
+   root->left->right = new Node(5);
+   root->right = new Node(3);
+   root->right->left= new Node(6);
+   root->right->right = new Node(7);
+   root->right->right->left = new Node(8);
+   // iterativeInorder(root);
+   // iterativePreorder(root);
    // preorderTraversal(root);
-   // cout<<"\n";
    // postorderTraversal(root);
+   iterativePostorder(root);
 
-   iterativeInorder(root);
    return 0;
 }
