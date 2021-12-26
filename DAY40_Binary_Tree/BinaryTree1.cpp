@@ -154,7 +154,7 @@ void iterativePostorder(Node* root){
    }
 }
 
-//Level Order with more funcationality
+//🌟🌟.Level Order with more funcationality
 void levelOrder2(Node* root){
    queue<Node*>q;
    q.push(root);
@@ -188,11 +188,12 @@ void leftView(Node* root){
       for(int i=0;i<n;i++){
          Node* cur = q.front();
          q.pop();
-         cout<<cur->data<<" ";
+         if(i==0)
+            cout<<cur->data<<" ";
          if(cur->left!=NULL){
             q.push(cur->left);
          }
-         if(cur->left==NULL && cur->right!=NULL){
+         if(cur->right!=NULL){
             q.push(cur->right);
          }
       }
@@ -208,11 +209,12 @@ void rightView(Node* root){
       for(int i=0;i<n;i++){
          Node* cur = q.front();
          q.pop();
-         cout<<cur->data<<" ";
+         if(i==n-1)
+            cout<<cur->data<<" ";
          if(cur->right!=NULL){
             q.push(cur->right);
          }
-         if(cur->right==NULL && cur->left!=NULL){
+         if(cur->left!=NULL){
             q.push(cur->left);
          }
       }
