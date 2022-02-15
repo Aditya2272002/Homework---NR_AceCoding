@@ -15,40 +15,46 @@ void fun(){
 
 class DSU{
    private:
-      int *leader;
+      int *captain;
       int *rank;
    
    public:
       DSU(int n){
-         leader = new int[n];
+         captain = new int[n];
          rank = new int[n];
 
          for(int i=0;i<n;i++){
-            leader[i] = -1;
+            captain[i] = -1;
             rank[i] = 1;
          }
       }
 
       int find(int x){
-         if(leader[x]==-1){
+         if(captain[x]==-1){
             return x;
          }else{
-            return leader[x] = find(leader[x]);
+            return captain[x] = find(captain[x]);
          }
       }
 
       void Union(int a,int b){
-         int captainA = find(a);
-         int captainB = find(b);
+         int A = find(a);
+         int B = find(b);
 
-         if(captainA != captainB){
-            if(rank[captainA] > rank[captainB]){
-               leader[captainB] = captainA;
-               rank[captainA] += rank[captainB];
+         if(A != B){
+            if(rank[A] >= rank[B]){
+               captain[B] = A;
+               rank[A] += rank[B];
             }else{
-                leader[captainA] = captainB;
-               rank[captainB] += rank[captainA];
+                captain[A] = B;
+               rank[B] += rank[A];
             }
+         }
+      }
+
+      void printing(int n){
+         for(int i=0;i<n;i++){
+            cout<<"Node "<<i<<" captain of "<<captain[i]<<" & rank "<<rank[i]<<"\n";
          }
       }
 };
@@ -81,6 +87,7 @@ void krushkal(vector<pair<int,pair<int,int>>>& edges,int n){
       cout<<u<<"->"<<v<<" has weight: "<<w<<"\n";
    }
 
+   dsu.printing(n);
 }
 
 
