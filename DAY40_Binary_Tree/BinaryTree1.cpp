@@ -14,6 +14,8 @@ class Node{
    }
 };
 
+
+
 Node* insert(Node* root, int data){
    if(root == NULL){
       return new Node(data);
@@ -154,7 +156,7 @@ void iterativePostorder(Node* root){
    }
 }
 
-//🌟🌟.Level Order with more funcationality
+//🌟🌟.Level Order with more funcationality O(N)
 void levelOrder2(Node* root){
    queue<Node*>q;
    q.push(root);
@@ -293,7 +295,7 @@ int main()
    //    int data;
    //    cout<<"Enter node data :- \n";
    //    cin>>data;
-   //    root=insert(root,data);
+      // root=insert(root,data);
    // }
 
    Node* root = new Node(1);

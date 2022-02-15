@@ -376,23 +376,108 @@ Node* removeLoopfromLL(Node* head){
    return head;
 }
 
+pair<bool,Node*> detectLoop(Node* head)
+    {
+       // your code here
+       Node* slow = head;
+       Node* fast = head;
+       while(fast!=NULL && fast->next!=NULL){
+          slow = slow->next;
+          fast=fast->next->next;
+          if(slow==fast){
+             return {true,fast};
+          }
+       }
+       return {false,NULL};
+    }
+    
+//Function to remove a loop in the linked list.
+void removeLoop(Node* head)
+    {
+        pair<bool,Node*> t =  detectLoop(head);
+        Node* slow = t.second;
+    
+        if(t.first){
+            cout<<"Slow and Fast meets at Node :- "<<t.second->data<<"\n";
+           
+            Node* t = slow;
+            Node* fast = head;
+            if(slow==head){
+                while(t->next!=slow){
+                    t=t->next;
+                }
+            }
+            else{
+                while(t->next!=fast && fast->next!=t->next){
+                    t=t->next;
+                    fast=fast->next;
+                }
+            }
+            t->next = NULL;
+        }else{
+           return;
+        }
+    }
+
+Node* add1ToLL(Node* root){
+   Node* h1 = reverse(root);
+   int carry = 0;
+   int x = 0,y = 1;
+   Node* t = h1;
+
+   while(t!=NULL){
+      x = t->data;
+      t->data = (x+y)%10;
+      carry = (x+y)/10;
+      t = t->next;
+      y = carry;
+   }
+   if(carry!=0){
+      Node* temp = h1;
+      while(temp->next!=NULL){
+         temp=temp->next;
+      }
+      temp->next = new Node(carry);
+   }
+   Node* ans = reverse(h1);
+   return ans;
+}
+
+Node* fun (){
+      long long int add=0;
+        int l=0;
+        Node* temp=head;
+        while(temp!=NULL){
+            l++;
+            temp=temp->next;
+        }
+        
+        
+        Node* temp2=head;
+        while(temp2!=NULL){
+            l=l-1;
+            add=add + (temp2->data* pow(10,l));
+            temp2=temp2->next;
+        }
+        
+        head->data=add+1;
+        head->next=NULL;
+        return head;
+}
+
 int main()
 {
-   head = new Node(10);
-   head->next = new Node(20);
-   head->next->next = new Node(30);
-   head->next->next->next = new Node(40);
-   head->next->next->next->next = new Node(25);
-   // head->next->next->next->next->next = new Node(60);
-
-   head->next->next->next->next->next = NULL;
-   // head->next->next->next->next->next->next = head->next->next;
-   // displayLoopedLL(head);
-   // loopedLL(head);
-   // Node* h = removeLoopfromLL(head);
-   disPlay(head);  
-   Node* h = reverseInKthGroup(head,2);
-   disPlay(h);
+   head = new Node(9);
+   head->next = new Node(9);
+   head->next->next = new Node(9);
+   head->next->next->next = NULL;
+   
+   cout<<"\n";
+   disPlay(head);
+   Node* ans = add1ToLL(head);
+   cout<<"\n";
+   disPlay(ans);
+   cout<<"\n";
 
    return 0;
 }
