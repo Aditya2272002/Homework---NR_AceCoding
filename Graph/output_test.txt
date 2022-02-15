@@ -1,11 +1,4 @@
-Indegree Array:- 
-0 1 1 2 
-Topological Sort:- 
-0 1 2 3 
-
-Shortest from source distance is:-
-(0,0) -> 0
-(0,1) -> 1
-(0,2) -> 4
-(0,3) -> 3
-
+Node : 0 has Parent : -1
+Node : 1 has Parent : 0
+Node : 2 has Parent : 0
+Node : 3 has Parent : 1
