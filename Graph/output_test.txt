@@ -1,4 +1,0 @@
-Node : 0 has Parent : -1
-Node : 1 has Parent : 0
-Node : 2 has Parent : 0
-Node : 3 has Parent : 1
