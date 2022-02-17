@@ -1,7 +1,0 @@
-0->1 has weight: 5
-0->2 has weight: 8
-1->3 has weight: 15
-Node 0 captain of -1 & rank 4
-Node 1 captain of 0 & rank 1
-Node 2 captain of 0 & rank 1
-Node 3 captain of 0 & rank 1

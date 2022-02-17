@@ -15,20 +15,7 @@ void fun(){
 
 int main(){
 
-  set<int> s;
-  s.insert(10);
-  s.insert(30);
-  s.insert(40);
 
- for(int i:s){
-    cout<<i<<" ";
- }
-  s.erase(30);
-
-
-for(int i:s){
-    cout<<i<<" ";
- }
    return 0;
 }
 
