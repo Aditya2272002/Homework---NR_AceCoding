@@ -1,7 +1,5 @@
 #include<bits/stdc++.h>
 using namespace std;
-#define mSize 1000
-
 void fun(){
    ios_base::sync_with_stdio(false);
    cin.tie(NULL);
@@ -12,6 +10,8 @@ void fun(){
    #endif
    
 }
+
+#define mSize 1000
 
 int parent[mSize];
 int disc[mSize];
