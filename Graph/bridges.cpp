@@ -43,13 +43,9 @@ void dfs(int u,vector<int> adj[]){
 int main()
 {
    fun();
-
    int n,e;
-   
    cin>>n>>e;
-
    vector<int> adj[n+1];
-
    for(int i=0;i<e;i++){
       int u,v;
       cin>>u>>v;
@@ -66,7 +62,5 @@ int main()
    }
 
    dfs(1,adj);
-   
-
    return 0;
 }

@@ -43,7 +43,6 @@ void dfs(int u,vector<int> adj[]){
 int main()
 {
    fun();
-
    int n,e;
    
    cin>>n>>e;
