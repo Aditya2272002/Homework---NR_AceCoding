@@ -30,6 +30,7 @@ void dfs(int u,vector<int> adj[]){
          low[u] = min(low[u],disc[v]);
       }else{
          parent[v] = u;
+         dfs(v,adj);
          low[u] = min(low[u],low[v]);
 
          if(low[v] > disc[u]){
@@ -42,14 +43,13 @@ void dfs(int u,vector<int> adj[]){
 int main()
 {
    fun();
-   
+
    int n,e;
-   cout<<"\nEnter nodes,edges :- \n";
+   
    cin>>n>>e;
 
-   vector<int> adj[n];
+   vector<int> adj[n+1];
 
-   cout<<"Enter Edges :- \n";
    for(int i=0;i<e;i++){
       int u,v;
       cin>>u>>v;
