@@ -27,8 +27,8 @@ int modInverse1(int a, int m)
 }
 
 int main(){
-   // int a = 3, m = 1000000007;
-   int a =45 ,m= 88;
+   int a = 3, m = 1000000007;
+   // int a =45 ,m= 88;
    // int a = 6 ,m = 34;
    if(__gcd(a,m)==1){
       cout<<modInverse1(a,m)<<"\n";

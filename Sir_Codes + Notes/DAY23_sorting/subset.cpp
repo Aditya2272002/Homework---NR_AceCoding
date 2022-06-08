@@ -5,26 +5,22 @@ using namespace std;
 // Space Complexity :- 
 
   // 📔 This is a function which gives the subset till i index in vector v
-void subSet(vector<int>& v,int i,vector<vector<int>>& allSubset,vector<int> currentSet){
 
-   if(i<0){
-      
-      //Subset Sum
-      // int sum =0;
-      // for(int i:currentSet){
-      //    sum += i;
-      // }
-      // cout<<sum<<" ";
+set<vector<int>> s;
+void subSet(vector<int>& v,int i,vector<vector<int>>& allSubset,vector<int> currentSet,int n){
 
+   if(i==n){
       allSubset.push_back(currentSet);
+      sort(currentSet.begin(),currentSet.end());
+      s.insert(currentSet);
       return;
    }
    //if current element is not selected
-   subSet(v,i-1,allSubset,currentSet);
+   subSet(v,i-1,allSubset,currentSet,n);
 
    //if current element is selected then push it
    currentSet.push_back(v[i]);
-   subSet(v,i-1,allSubset,currentSet);
+   subSet(v,i-1,allSubset,currentSet,n);
 
    //removing all currentSet's old element i.e referesh currentSet
    currentSet.pop_back();
@@ -64,7 +60,7 @@ int main()
    //    cout<<"\n";
    // }
 
-   int arr[] = {1,2};
+   int arr[] = {1,2,3};
    int n = sizeof(arr)/sizeof(arr[0]);
    vector<int> ans;
    ssubSet(arr,n-1,ans);
